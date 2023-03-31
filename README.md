@@ -50,6 +50,7 @@ Descargar la aplicación ya sea para Windows o Linux, una vez descargada, identi
     allowfullscreen
 >
 </iframe>
+[![prueba](https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2017/08/17/15029604842124.jpg)](https://res.cloudinary.com/di6mevrkr/video/upload/v1680243093/generador_documentos/descargar-ejecutable.webm)
 
 __*A medida que siga los pasos encontrara los archivos utilizados para el ejemplo de uso.*__
 
