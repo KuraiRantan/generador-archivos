@@ -42,6 +42,7 @@ def select_datos(variable:StringVar, file_types:tuple, type_dialog:str='filename
         for widget in dinamic_widgets:
             widget['frame'].destroy()
         btn_cargar_datos.config(state='disabled')
+        dinamic_widgets.clear()
 
 
 
@@ -111,6 +112,8 @@ def generar_resultado()-> None:
     
     if len(listado_valores) == 0:
         messagebox.showerror(title='ERROR', message='Debes seleecionar el archivo de datos y dar click al boton "CARGAR DATOS"')
+        progess_generate.grid_forget()
+        btn_generar_resultado.config(state='normal')
         return
     
     # Se crea la funcion y se ejecuta en un hilo(thread) separado del principal

@@ -39,8 +39,9 @@ def generar_archivo(path_plantilla:str, path_salida:str, formato_inicio:str, for
                     part1, text = text.split(variable)[0], text.split(variable)[1]
                     pre_build.append(part1)
                     pre_build.append((valores[index], list_variables[index][1], list_variables[index][2]))
-                
             if len(pre_build) > 0:
+                if type(pre_build[-1]) == tuple and text != '':
+                    pre_build.append(text)
                 for line in pre_build:
                     if type(line) == tuple:
                         new_paragraph = paragraph.add_run(line[0])
@@ -69,6 +70,7 @@ def generar_archivo(path_plantilla:str, path_salida:str, formato_inicio:str, for
             temp_path = os.path.join(path_salida, f'{file_name}.docx')
             document.save(temp_path)
     except Exception as ex:
+        print(ex)
         pass # TODO: Add logging
     
    
