@@ -6,7 +6,10 @@
 
 ## Código fuente
 
-**Nota:** ***Requisito tener instalado Python 3.4+ en el equipo.***
+**Requisitos:**
+
+* ***Tener instalado Python 3.4+ en el equipo.***
+* ***Para salida en PDF debes tener instalado Office(Windows)/LibreOffice(Linux).***
 
 Abrir una terminal y ejecutar los siguientes comandos:
 
