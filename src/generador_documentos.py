@@ -1,5 +1,6 @@
 import os, subprocess, shutil, uuid
 from docx import Document
+from custom_logging import logger
 
 if os.name == 'nt':
     import comtypes.client
@@ -19,15 +20,15 @@ if os.name == 'nt':
 
 
 '''
-    list_variables -> [(nombre, bold, italic), (edad, bold italic), (institucion, bold, italic)]
-    valores -> ['jorge camargo', '22', 'itey']
+    list_variables -> [(name, bold, italic), (age, bold italic), (institution, bold, italic)]
+    valores -> ['Luis Bagner', '22', 'random institution']
 '''
 def generar_archivo(path_plantilla:str, path_salida:str, formato_inicio:str, formato_fin:str, pdf_or_word:str, list_variables:list, valores:list) -> None:
     try:
         document = Document(path_plantilla)
         
-        #nombre;edad;institucion
-        #jorge;22;itey
+        #name;age;institution
+        #Luis Bagner;22;random institution
         for paragraph in document.paragraphs:
             text = paragraph.text
             pre_build = []
@@ -50,7 +51,6 @@ def generar_archivo(path_plantilla:str, path_salida:str, formato_inicio:str, for
                     else:
                         paragraph.add_run(line)
 
-        # file_name = f'archivo-{random.randrange(0, 100)}'
         file_name = uuid.uuid4().__str__()
 
         if pdf_or_word == 'PDF':
@@ -70,10 +70,7 @@ def generar_archivo(path_plantilla:str, path_salida:str, formato_inicio:str, for
             temp_path = os.path.join(path_salida, f'{file_name}.docx')
             document.save(temp_path)
     except Exception as ex:
-        print(ex)
-        pass # TODO: Add logging
-    
-   
+        logger.error(ex)
 
 
 def generar_archivos(path_plantilla:str, path_salida:str, formato_inicio:str, formato_fin:str, pdf_or_word:str, list_variables:list,  list_valores:list) -> None:
@@ -82,12 +79,12 @@ def generar_archivos(path_plantilla:str, path_salida:str, formato_inicio:str, fo
     path_salida = os.path.normpath(os.path.join(path_salida, 'generated_files'))
     try:
         shutil.rmtree(path_salida)
-    except FileNotFoundError as  ex:
-        print(ex)
+    except FileNotFoundError as ex:
+        logger.info(ex)
     try:
         os.mkdir(path_salida)   
     except FileExistsError as ex:
-        print(ex)
+        logger.info(ex)
 
     for valores in list_valores:
         generar_archivo(path_plantilla, path_salida, formato_inicio, formato_fin, pdf_or_word, list_variables, valores)
